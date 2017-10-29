@@ -1,0 +1,12 @@
+SELECT first_name, middle_name, last_name, address, birth_date 
+FROM patient JOIN visit on visit.visit_patient_fk = patient.patient_pk WHERE visit.visit_date = '12/15/2016';
+
+SELECT distinct patient_pk FROM patient 
+RIGHT JOIN visit ON visit.visit_patient_fk = patient.patient_pk 
+WHERE patient_pk NOT IN (SELECT patient_pk FROM patient RIGHT JOIN visit ON visit.visit_patient_fk = patient.patient_pk
+WHERE visit.doctor_fk != patient.doctor_fk);
+
+SELECT SUM(dental_service.cost), EXTRACT(month FROM visit_date) "Month" FROM visit_dental_service 
+JOIN visit ON visit.visit_pk = visit_dental_service.visit_fk 
+JOIN dental_service ON dental_service.dental_service_pk = visit_dental_service.dental_service_fk 
+WHERE EXTRACT(year FROM visit_date) = EXTRACT(year FROM SYSDATE) GROUP BY EXTRACT(month FROM visit_date);
