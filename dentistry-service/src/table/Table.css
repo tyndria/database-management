@@ -6,6 +6,13 @@
   overflow-x: hidden !important;
 }
 
+.react-grid-Row:last-child {
+  height: 35px;
+  overflow: hidden;
+  contain: layout;
+  border: 2px solid green;
+}
+
 .action-button {
   padding: 0.5rem 1rem;
   background-color: white;

@@ -10,12 +10,21 @@ const service = TableService();
 class EditableTable extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { rows: [], columns: [], selectedIndexes: [], tableName: props.tableName };
-		this.initTableData(props.tableName)
+		this.state = { rows: [], columns: [], selectedIndexes: [], tableName: props.tableName, dateValue: '' };
+		if (props.tableName !== 'Visits Details') {
+			this.initTableData(props.tableName);
+		} else {
+			this.setState({rows: [], columns: []})
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.initTableData(nextProps.tableName)
+		this.setState({tableName: nextProps.tableName});
+		if (nextProps.tableName !== 'Visits Details') {
+			this.initTableData(nextProps.tableName);
+		} else {
+			this.setState({rows: [], columns: []})
+		}
 	}
 
 	initTableData  = (tableName) => {
@@ -68,6 +77,12 @@ class EditableTable extends Component {
 		return this.state.rows.filter((row, index) => this.state.selectedIndexes.includes(index));
 	};
 
+	filterData = () => {
+		service.filterRecords(this.state.tableName, this.state.dateValue).then((res) => {
+			this.prepareTableData(res);
+		});
+	};
+
 	prepareTableData = (res) => {
 		const emptyRow = {};
 		res.columns.forEach((column) => {
@@ -78,6 +93,10 @@ class EditableTable extends Component {
 			rows: res.rows,
 			columns: res.columns
 		})
+	};
+
+	handleChange = (event) => {
+		this.setState({dateValue: event.target.value.toUpperCase()});
 	};
 
 	render() {
@@ -100,6 +119,14 @@ class EditableTable extends Component {
 					}}
 				/>
 				<div className="button-panel">
+					{this.state.tableName === 'Visits Details' ?
+						<span>
+							<label>Date: </label>
+							<input type="text" value={this.state.dateValue} onChange={this.handleChange}></input>
+							<button className="action-button" onClick={this.filterData}>Filter</button>
+						</span>
+						: ''
+					}
 					<button className="action-button" onClick={this.updateRows}>Apply (Edit)</button>
 					<button className="action-button" onClick={this.deleteRow}>Delete</button>
 				</div>

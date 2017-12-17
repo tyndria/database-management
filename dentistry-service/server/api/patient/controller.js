@@ -8,7 +8,7 @@ const utils = require('../utils');
 
 function getPatients(res) {
 	return oracledb.getPool().getConnection().then(conn => {
-		const query = `SELECT PATIENT.ID, PATIENT.FIRST_NAME, PATIENT.LAST_NAME, PATIENT.ADDRESS, PATIENT.BIRTH_DATE, 
+		const query = `SELECT PATIENT.ID, PATIENT.FIRST_NAME, PATIENT.LAST_NAME, PATIENT.ADDRESS, 
 		PAYMENT_TYPE.TYPE, PATIENT.PAYMENT_TYPE_ID, PATIENT.DOCTOR_ID, DOCTOR.LAST_NAME AS DOCTOR_LAST_NAME FROM PATIENT 
 		INNER JOIN PAYMENT_TYPE ON PATIENT.PAYMENT_TYPE_ID = PAYMENT_TYPE.ID 
 		INNER JOIN DOCTOR ON PATIENT.DOCTOR_ID = DOCTOR.ID `;
@@ -28,13 +28,8 @@ function updatePatientsById(res, tableName, ids) {
 	return utils.updateTableRecords(res, tableName, ids);
 }
 
-function getPatientsByDay(res) {
-
-}
-
 module.exports = {
 	getPatients,
-	getPatientsByDay,
 	deletePatientsById,
 	updatePatientsById
 };

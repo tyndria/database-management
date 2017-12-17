@@ -21,6 +21,7 @@ const serviceRouter = require('./api/service/routes');
 const visitRouter = require('./api/visit/routes');
 const revenueRouter = require('./api/revenue/routes');
 const patientDetails = require('./api/patientDetails/routes');
+const visitDetails = require('./api/visitDetails/routes');
 
 app.use('/api/patient', patientRouter);
 app.use('/api/doctor', doctorRouter);
@@ -28,6 +29,7 @@ app.use('/api/service', serviceRouter);
 app.use('/api/visit', visitRouter);
 app.use('/api/revenue', revenueRouter);
 app.use('/api/patientDetails', patientDetails);
+app.use('/api/visitDetails', visitDetails);
 
 const port = 8000;
 

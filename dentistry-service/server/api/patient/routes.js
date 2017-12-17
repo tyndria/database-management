@@ -17,11 +17,4 @@ router.route('/')
 		return controller.updatePatientsById(res, TABLE_NAME, rowsToUpdate);
 	});
 
-
-router.route('/patientsByDay')
-	.get((req, res) => {
-		const {name, rows} = req.query;
-		return controller.getPatientsByDay(res);
-	});
-
 module.exports = router;

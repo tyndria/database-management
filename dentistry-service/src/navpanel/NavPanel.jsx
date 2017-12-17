@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 
 import './NavPanel.css';
 
-const links = ['Patients', 'Patients Details', 'Doctors', 'Visits', 'Services', 'Monthly Revenue'];
+const links = ['Patients', 'Patients Details', 'Doctors', 'Visits', 'Visits Details', 'Services', 'Monthly Revenue'];
 
 const NavPanel = props =>
 	<div className="navpanel">
