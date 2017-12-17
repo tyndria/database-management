@@ -15,7 +15,7 @@ function getMenuItems(clickCallback) {
 		<div
 			key={item}
 			className="navpanel-item"
-			onMouseEnter={() => clickCallback(item)}>
+			onMouseDown={() => clickCallback(item)}>
 			<span>
 				{item}
 			</span>

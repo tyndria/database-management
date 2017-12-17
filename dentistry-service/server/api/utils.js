@@ -22,8 +22,8 @@ function getTableRecords(res, tableName) {
 }
 
 function updateTableRecords(res, tableName, tableRows) {
-	oracledb.getPool().getConnection().then(conn => {
-		let query = `SELECT column_name from user_tab_cols where table_name = '${tableName}'`;
+	return oracledb.getPool().getConnection().then(conn => {
+		let query = `SELECT COLUMN_NAME from USER_TAB_COLS WHERE TABLE_NAME = '${tableName}'`;
 		return conn.execute(query)
 			.then(result => {
 				const columns = result.rows.map(row => row[0]);
@@ -31,12 +31,10 @@ function updateTableRecords(res, tableName, tableRows) {
 					const ids = result.rows.map(value => value[0]);
 					const bindedRows = tableRows.reduce((prev, curr) => {
 						let newRow = {};
-						columns.forEach((col, index) => {
-							newRow[col] = curr[index];
+						columns.forEach((col) => {
+							newRow[col] = curr[col];
 						});
-						for (let i = 0; i < columns.length; i++) {
-							newRow[columns[i]] = curr[i];
-						}
+
 						const pushTo = ids.includes(newRow.ID) ? 'toUpdate' : 'toInsert';
 						prev[pushTo].push(newRow);
 						return prev;
@@ -60,8 +58,12 @@ function updateTableRecords(res, tableName, tableRows) {
 								return conn.close();
 							});
 						}).catch(err => {
+							console.log(err);
 							res.status(500).json({message: err.message});
 						});
+					}).catch(err => {
+						console.log(err);
+						res.status(500).json({message: err.message});
 					});
 				});
 			});

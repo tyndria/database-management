@@ -1,72 +1,37 @@
 import React, {Component} from 'react';
+import { PropTypes } from 'prop-types';
 import update from 'immutability-helper';
 import ReactDataGrid from 'react-data-grid';
-//import ReactDataGridPlugins from 'react-data-grid/addons';
-
+import TableService from './TableService';
 import './Table.css';
+
+const service = TableService();
 
 class EditableTable extends Component {
 	constructor(props) {
 		super(props);
-		this._columns = [
-			{
-				key: 'id',
-				name: 'ID',
-				width: 80
-			},
-			{
-				key: 'task',
-				name: 'Title',
-				editable: true
-			},
-			{
-				key: 'priority',
-				name: 'Priority',
-				editable: true
-			},
-			{
-				key: 'issueType',
-				name: 'Issue Type',
-				editable: true
-			},
-			{
-				key: 'complete',
-				name: '% Complete',
-				editable: true
-			},
-			{
-				key: 'startDate',
-				name: 'Start Date',
-				editable: true
-			},
-			{
-				key: 'completeDate',
-				name: 'Expected Complete',
-				editable: true
-			}
-		];
-
-		this.state = { rows: this.createRows(1000) };
+		this.state = { rows: [], columns: [], selectedIndexes: [], tableName: props.tableName }
+		this.initTableData(props.tableName)
 	}
 
-	getRandomDate = (start, end) => {
-		return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toLocaleDateString();
-	};
-
-	createRows = (numberOfRows) => {
-		let rows = [];
-		for (let i = 1; i < numberOfRows; i++) {
-			rows.push({
-				id: i,
-				task: 'Task ' + i,
-				complete: Math.min(100, Math.round(Math.random() * 110)),
-				priority: ['Critical', 'High', 'Medium', 'Low'][Math.floor((Math.random() * 3) + 1)],
-				issueType: ['Bug', 'Improvement', 'Epic', 'Story'][Math.floor((Math.random() * 3) + 1)],
-				startDate: this.getRandomDate(new Date(2015, 3, 1), new Date()),
-				completeDate: this.getRandomDate(new Date(), new Date(2016, 0, 1))
-			});
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.tableName !== this.state.tableName) {
+			console.log("new state" + nextProps.tableName);
 		}
-		return rows;
+	}
+
+	initTableData  = (tableName) => {
+		service.getTableRecords(tableName).then((res) => {
+			const emptyRow = {};
+			res.columns.forEach((column) => {
+				emptyRow[column] = null;
+			});
+			res.rows.push(emptyRow);
+			this.setState({
+				rows: res.rows,
+				columns: res.columns
+			})
+		});
 	};
 
 	rowGetter = (i) => {
@@ -78,24 +43,59 @@ class EditableTable extends Component {
 
 		for (let i = fromRow; i <= toRow; i++) {
 			let rowToUpdate = rows[i];
-			let updatedRow = update(rowToUpdate, {$merge: updated});
+			const updatedRow = update(rowToUpdate, {$merge: updated});
 			rows[i] = updatedRow;
 		}
 
 		this.setState({ rows });
 	};
 
+	onRowsSelected = (rows) => {
+		this.state.selectedIndexes.push(rows[0].rowIdx);
+	};
+
+	onRowsDeselected = (rows) => {
+		this.setState((state) => ({
+			selectedIndexes: state.selectedIndexes.filter(row => rows[0].rowIdx !== row)
+		}));
+	};
+
+	updateRows = () => {
+		const rowsToUpdate = this.state.rows.filter((row, index) => this.state.selectedIndexes.includes(index));
+		service.updateTableRecords(this.state.tableName, this.state.rows, rowsToUpdate).then((res) => {
+			console.log(res);
+		});
+	};
+
 	render() {
 		return  (
-			<ReactDataGrid
-				enableCellSelect={true}
-				columns={this._columns}
-				rowGetter={this.rowGetter}
-				rowsCount={this.state.rows.length}
-				minHeight={500}
-				onGridRowsUpdated={this.handleGridRowsUpdated} />);
+			<div>
+				<ReactDataGrid
+					enableCellSelect={true}
+					columns={this.state.columns}
+					rowGetter={this.rowGetter}
+					rowsCount={this.state.rows.length}
+					minHeight={500}
+					onGridRowsUpdated={this.handleGridRowsUpdated}
+					rowSelection={{
+						showCheckbox: true,
+						onRowsSelected: this.onRowsSelected,
+						onRowsDeselected: this.onRowsDeselected,
+						selectBy: {
+							indexes: this.state.selectedIndexes
+						}
+					}}
+				/>
+				<div className="button-panel">
+					<button onClick={this.updateRows}>Apply (Edit)</button>
+					<button>Delete</button>
+				</div>
+			</div>);
 	}
 }
 
+EditableTable.propTypes = {
+	tableName: PropTypes.string
+};
 
 export default EditableTable;

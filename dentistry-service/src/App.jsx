@@ -15,6 +15,7 @@ class App extends Component {
 
 	navPanelItemChange = item => {
 		if (item !== this.state.route) {
+
 			this.setState({ route: item });
 		}
 	};
@@ -28,7 +29,7 @@ class App extends Component {
 				<div className="main-container">
 					<NavPanel onMenuClick={this.navPanelItemChange}></NavPanel>
 					<div className="content">
-						<EditableTable/>
+						<EditableTable tableName={this.state.route}/>
 					</div>
 				</div>
 			</div>

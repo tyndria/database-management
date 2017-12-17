@@ -17,8 +17,8 @@ app.use(cookieParser());
 
 const patientRouter = require('./api/patient/routes');
 
-app.use('/api/patient', patientRouter);
 
+app.use('/api/patient', patientRouter);
 const port = 8000;
 
 oracledb.createPool(dbConfig).then( () => {
