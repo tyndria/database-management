@@ -9,7 +9,7 @@ router.route('/')
 		return controller.getPatients(res);
 	})
 	.delete((req, res) => {
-		const {rowsToDelete} = req.body;
+		const {rowsToDelete} = req.query;
 		return controller.deletePatientsById(res, TABLE_NAME, rowsToDelete);
 	})
 	.put((req, res) => {

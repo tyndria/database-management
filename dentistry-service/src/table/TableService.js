@@ -1,24 +1,35 @@
 import axios from 'axios';
 
 const ROOT_URL = '/api/';
-const TABLE_NAMES = {
+const ROUTES_NAMES = {
 	'Patients': 'patient',
 	'Doctors': 'doctor',
 	'Visits': 'visit',
 	'Services': 'service',
-	'Monthly Revenue': 'patient'
+	'Monthly Revenue': 'revenue',
+	'Patients Details': 'patientDetails'
 };
 
 const editableColumns = {
-	'Patients': ['FIRST_NAME', 'LAST_NAME', 'ADDRESS']
+	'Patients': ['FIRST_NAME', 'LAST_NAME', 'ADDRESS'],
+	'Doctors': ['FIRST_NAME', 'LAST_NAME', 'ADDRESS'],
+	'Services': ['TITLE', 'COST'],
+	'Visits': [],
+	'Monthly Revenue': [],
+	'Patients Details': []
 };
 
 const visibleColumns = {
-	'Patients': ['FIRST_NAME', 'LAST_NAME', 'ADDRESS', 'BIRTH_DATE', 'DOCTOR_LAST_NAME', 'TYPE']
+	'Patients': ['FIRST_NAME', 'LAST_NAME', 'ADDRESS', 'BIRTH_DATE', 'DOCTOR_LAST_NAME', 'TYPE'],
+	'Doctors': ['FIRST_NAME', 'LAST_NAME', 'ADDRESS'],
+	'Services': ['TITLE', 'COST'],
+	'Visits': ['VISIT_DATE', 'PATIENT_LAST_NAME', 'DOCTOR_LAST_NAME'],
+	'Monthly Revenue': ['SUM', 'MONTH'],
+	'Patients Details': ['FIRST_NAME', 'LAST_NAME', 'ADDRESS', 'BIRTH_DATE']
 };
 
 function getTableRecords(name) {
-	return axios.get(`${ROOT_URL}/${TABLE_NAMES[name]}`).then(res => {
+	return axios.get(`${ROOT_URL}/${ROUTES_NAMES[name]}`).then(res => {
 		return mapData(res, name);
 	}, err => {
 		/* TODO: handle errors appropriately */
@@ -26,13 +37,22 @@ function getTableRecords(name) {
 	});
 }
 
-function updateTableRecords(name, rows, rowsToUpdate) {
-	return axios.put(`${ROOT_URL}${TABLE_NAMES[name]}`, {rowsToUpdate}).then(res => {
+function updateTableRecords(name, rowsToUpdate) {
+	return axios.put(`${ROOT_URL}${ROUTES_NAMES[name]}`, {rowsToUpdate}).then(res => {
 		return mapData(res, name);
 		}, err => {
 			/* TODO: handle errors appropriately */
 			console.log('error: ' + err);
 		});
+}
+
+function deleteTableRecords(name, rowsToDelete) {
+	return axios.delete(`${ROOT_URL}${ROUTES_NAMES[name]}`, {params: {rowsToDelete}}).then(res => {
+		return mapData(res, name);
+	}, err => {
+		/* TODO: handle errors appropriately */
+		console.log('error: ' + err);
+	});
 }
 
 function mapData(res, name) {
@@ -60,7 +80,8 @@ function mapData(res, name) {
 const TableService = () => {
 	return {
 		getTableRecords: getTableRecords,
-		updateTableRecords: updateTableRecords
+		updateTableRecords: updateTableRecords,
+		deleteTableRecords: deleteTableRecords
 	}
 };
 

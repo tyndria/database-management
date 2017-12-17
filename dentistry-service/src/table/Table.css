@@ -1,0 +1,15 @@
+.react-grid-HeaderRow {
+  overflow-y: hidden;
+}
+
+.react-grid-Canvas {
+  overflow-x: hidden !important;
+}
+
+.action-button {
+  padding: 0.5rem 1rem;
+  background-color: white;
+  border: 2px solid black;
+  font-size: 1.2rem;
+  margin: 0.5rem;
+}

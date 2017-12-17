@@ -29,6 +29,8 @@ class App extends Component {
 				<div className="main-container">
 					<NavPanel onMenuClick={this.navPanelItemChange}></NavPanel>
 					<div className="content">
+						{ this.state.route === 'Patients Details' ?
+							<div className="details-remark">* Patients, that haven't been serviced yet not by their doctor</div> : '' }
 						<EditableTable tableName={this.state.route}/>
 					</div>
 				</div>

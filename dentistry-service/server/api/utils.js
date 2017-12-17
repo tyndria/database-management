@@ -11,7 +11,7 @@ module.exports = {
 };
 
 function getTableRecords(res, tableName) {
-	oracledb.getPool().getConnection().then(conn => {
+	return oracledb.getPool().getConnection().then(conn => {
 		const query = `SELECT * FROM ${tableName}`;
 		return conn.execute(query).then(result => {
 			result.metaData = result.metaData.map(column => column.name);
@@ -72,7 +72,7 @@ function updateTableRecords(res, tableName, tableRows) {
 }
 
 function deleteTableRecords(res, tableName, ids) {
-	oracledb.getPool().getConnection().then(conn => {
+	return oracledb.getPool().getConnection().then(conn => {
 		ids = ids.join(', ');
 		const query = `DELETE FROM ${tableName} WHERE ID IN (${ids})`;
 		return conn.execute(query, [], {autoCommit: true}).then(() => {
@@ -80,8 +80,13 @@ function deleteTableRecords(res, tableName, ids) {
 				result.metaData = result.metaData.map(column => column.name);
 				res.status(200).send(result);
 				return conn.close();
+			}).catch(err => {
+				console.log(err);
+				res.status(500).json({message: err.message});
 			});
+		}).catch(err => {
+			console.log(err);
+			res.status(500).json({message: err.message});
 		});
-	})
-		.catch(err => res.status(500).send(err));
+	}).catch(err => res.status(500).send(err));
 }

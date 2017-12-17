@@ -34,6 +34,12 @@
   width: 100%;
 }
 
+.details-remark {
+  padding: 1.5rem;
+  font-style: italic;
+  font-weight: bold;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

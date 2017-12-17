@@ -10,27 +10,17 @@ const service = TableService();
 class EditableTable extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { rows: [], columns: [], selectedIndexes: [], tableName: props.tableName }
+		this.state = { rows: [], columns: [], selectedIndexes: [], tableName: props.tableName };
 		this.initTableData(props.tableName)
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.tableName !== this.state.tableName) {
-			console.log("new state" + nextProps.tableName);
-		}
+		this.initTableData(nextProps.tableName)
 	}
 
 	initTableData  = (tableName) => {
 		service.getTableRecords(tableName).then((res) => {
-			const emptyRow = {};
-			res.columns.forEach((column) => {
-				emptyRow[column] = null;
-			});
-			res.rows.push(emptyRow);
-			this.setState({
-				rows: res.rows,
-				columns: res.columns
-			})
+			this.prepareTableData(res);
 		});
 	};
 
@@ -61,10 +51,33 @@ class EditableTable extends Component {
 	};
 
 	updateRows = () => {
-		const rowsToUpdate = this.state.rows.filter((row, index) => this.state.selectedIndexes.includes(index));
-		service.updateTableRecords(this.state.tableName, this.state.rows, rowsToUpdate).then((res) => {
-			console.log(res);
+		const rowsToUpdate = this.getSelectedRows();
+		service.updateTableRecords(this.state.tableName, rowsToUpdate).then((res) => {
+			this.prepareTableData(res);
 		});
+	};
+
+	deleteRow = () => {
+		const rowsToDelete = this.getSelectedRows().map((row) => row.ID);
+		service.deleteTableRecords(this.state.tableName, rowsToDelete).then((res) => {
+			this.prepareTableData(res);
+		});
+	};
+
+	getSelectedRows = () => {
+		return this.state.rows.filter((row, index) => this.state.selectedIndexes.includes(index));
+	};
+
+	prepareTableData = (res) => {
+		const emptyRow = {};
+		res.columns.forEach((column) => {
+			emptyRow[column] = null;
+		});
+		res.rows.push(emptyRow);
+		this.setState({
+			rows: res.rows,
+			columns: res.columns
+		})
 	};
 
 	render() {
@@ -87,8 +100,8 @@ class EditableTable extends Component {
 					}}
 				/>
 				<div className="button-panel">
-					<button onClick={this.updateRows}>Apply (Edit)</button>
-					<button>Delete</button>
+					<button className="action-button" onClick={this.updateRows}>Apply (Edit)</button>
+					<button className="action-button" onClick={this.deleteRow}>Delete</button>
 				</div>
 			</div>);
 	}
