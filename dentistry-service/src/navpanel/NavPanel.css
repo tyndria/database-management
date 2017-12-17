@@ -1,0 +1,17 @@
+.navpanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 30%;
+  justify-content: center;
+}
+
+.navpanel-item {
+  font-size: 1.5rem;
+  padding: 2rem;
+}
+
+.navpanel-item:hover {
+  cursor: pointer;
+  font-size: 1.7rem;
+}
