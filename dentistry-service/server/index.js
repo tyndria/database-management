@@ -15,9 +15,9 @@ app.use(bodyParser.urlencoded({
 app.use(morgan('dev'));
 app.use(cookieParser());
 
-const clientRouter = require('./api/client/routes');
+const patientRouter = require('./api/patient/routes');
 
-app.use('/api/client', clientRouter);
+app.use('/api/patient', patientRouter);
 
 const port = 8000;
 

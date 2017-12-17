@@ -6,17 +6,17 @@ const router = express.Router();
 
 router.route('/')
 	.get((req, res) => {
-		return controller.getClients(res);
+		return controller.getPatients(res);
 	});
 
-router.route('/clients')
+router.route('/patients')
 	.get((req, res) => {
-		return controller.getClients(res);
+		return controller.getPatients(res);
 	});
 
-router.route('/clientsByDay')
+router.route('/patientsByDay')
 	.get((req, res) => {
-		return controller.getClientsByDay(res);
+		return controller.getPatientsByDay(res);
 	});
 
 module.exports = router;
