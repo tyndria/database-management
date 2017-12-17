@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 const ROOT_URL = '/api/';
 const ROUTES_NAMES = {
@@ -27,6 +28,8 @@ const visibleColumns = {
 	'Monthly Revenue': ['SUM', 'MONTH'],
 	'Patients Details': ['FIRST_NAME', 'LAST_NAME', 'ADDRESS', 'BIRTH_DATE']
 };
+
+const dateColumns = ['BIRTH_DATE', 'VISIT_DATE'];
 
 function getTableRecords(name) {
 	return axios.get(`${ROOT_URL}/${ROUTES_NAMES[name]}`).then(res => {
@@ -57,23 +60,28 @@ function deleteTableRecords(name, rowsToDelete) {
 
 function mapData(res, name) {
 	const result = {};
-	const columns = res.data.metaData;
+	let columns = res.data.metaData;
 	const rows = res.data.rows;
 	result.columns = columns.filter((column) => {
-		return visibleColumns[name].includes(column);
-	}).map(column => ({
-		key: column,
-		name: column,
-		editable: editableColumns[name].includes(column)
-	}));
+			return visibleColumns[name].includes(column);
+		}).map(column => ({
+			key: column,
+			name: column,
+			editable: editableColumns[name].includes(column),
+			isDate: dateColumns.includes(column)
+		}));
 
 	result.rows = rows.map((row) => {
 		const resRow = {};
 		row.forEach((cell, index) => {
 			resRow[columns[index]] = cell;
+			if (dateColumns.includes(columns[index])) {
+				resRow[columns[index]] = moment(cell).startOf('day').format('MM/DD/YYYY');
+			}
 		});
 		return resRow;
 	});
+
 	return result;
 }
 
