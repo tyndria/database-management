@@ -30,6 +30,13 @@
   height: 100%;
 }
 
+.table-name {
+  font-size: 1.4rem;
+  padding: 0.5rem;
+  text-align: left;
+  font-weight: bold;
+}
+
 .content {
   width: 100%;
 }

@@ -6,6 +6,10 @@
   overflow-x: hidden !important;
 }
 
+.react-grid-Grid {
+  min-height: 400px !important;
+}
+
 .react-grid-Row:last-child {
   height: 35px;
   overflow: hidden;

@@ -129,45 +129,108 @@ Insert into CURE (ID, TYPE) values (2,'CROWN');
 
 REM INSERTING into DOCTOR
 SET DEFINE OFF;
-Insert into DOCTOR (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE) values (1,'Kate','Hoho', 'Minsk, Uralavo', TO_DATE('11-11-1980', 'MM-DD-YYYY'));
+Insert into DOCTOR (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE) values (1,'Alex','Monk', 'Minsk, Belarus, Uralovo', TO_DATE('11-11-1980', 'MM-DD-YYYY'));
 Insert into DOCTOR (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE) values (2,'James','Brot', 'Minsk, 140', TO_DATE('11-08-1970', 'MM-DD-YYYY'));
-Insert into DOCTOR (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE) values (3,'Nen','Hohopfew', 'Minsk, 4653', TO_DATE('09-01-1978', 'MM-DD-YYYY'));
+Insert into DOCTOR (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE) values (3,'Nancy','Mina', 'Minsk, 4653', TO_DATE('09-01-1978', 'MM-DD-YYYY'));
+Insert into DOCTOR (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE) values (4,'Kate','Gonkov', 'Gomel, Zareckogo', TO_DATE('04-11-1983', 'MM-DD-YYYY'));
+Insert into DOCTOR (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE) values (5,'Oleg','Petrov', 'Vitebsk, Glabnaya, 140', TO_DATE('11-08-1979', 'MM-DD-YYYY'));
+Insert into DOCTOR (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE) values (6,'Andrew','Wozbord', 'Chashniki, 12', TO_DATE('07-10-1967', 'MM-DD-YYYY'));
+Insert into DOCTOR (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE) values (7,'Svetlana','Hoho', 'Minsk, Uralavo', TO_DATE('11-05-1975', 'MM-DD-YYYY'));
+Insert into DOCTOR (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE) values (8,'Jaugen','Kormilec', 'Minsk, Gorodeckaya, 140', TO_DATE('11-08-1970', 'MM-DD-YYYY'));
+Insert into DOCTOR (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE) values (9,'Nick','Vorobev', 'Grodno, 27', TO_DATE('09-01-1978', 'MM-DD-YYYY'));
+Insert into DOCTOR (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE) values (10,'Kate','Karmina', 'Moscow', TO_DATE('01-06-1985', 'MM-DD-YYYY'));
 
 REM INSERTING into PATIENT
 SET DEFINE OFF;
 Insert into PATIENT (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE, PAYMENT_TYPE_ID, DOCTOR_ID)
-    values (1,'Kate','Hoho', 'Minsk, Uralavo', TO_DATE('11-11-1980', 'MM-DD-YYYY'), 1, 1);
+    values (1, 'Ali', 'Laprade', 'Minsk, Uralavo', TO_DATE('11-11-1980', 'MM-DD-YYYY'), 1, 1);
 Insert into PATIENT (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE, PAYMENT_TYPE_ID, DOCTOR_ID)
-    values (2,'James','Brot', 'Minsk, 140', TO_DATE('11-09-1970', 'MM-DD-YYYY'), 2, 1);
+    values (2,'Ernestina','Boltz', 'Minsk, 140', TO_DATE('11-09-1970', 'MM-DD-YYYY'), 2, 4);
 Insert into PATIENT (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE, PAYMENT_TYPE_ID, DOCTOR_ID)
-    values (3,'Nen','Hohopfew', 'Minsk, 4653', TO_DATE('09-01-1978', 'MM-DD-YYYY'), 2, 3);
+    values (3,'Wilbert','Uplinger', 'Minsk, 4653', TO_DATE('09-01-1978', 'MM-DD-YYYY'), 2, 5);
+Insert into PATIENT (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE, PAYMENT_TYPE_ID, DOCTOR_ID)
+    values (4,'Phillis','Darr', 'Minsk, Uralavo', TO_DATE('11-11-1980', 'MM-DD-YYYY'), 1, 5);
+Insert into PATIENT (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE, PAYMENT_TYPE_ID, DOCTOR_ID)
+    values (5,'Candyce','Pilot', 'Minsk, 140', TO_DATE('11-09-1970', 'MM-DD-YYYY'), 2, 6);
+Insert into PATIENT (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE, PAYMENT_TYPE_ID, DOCTOR_ID)
+    values (6,'Antione','Ruddick', 'Minsk, 4653', TO_DATE('09-01-1978', 'MM-DD-YYYY'), 2, 7);
+Insert into PATIENT (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE, PAYMENT_TYPE_ID, DOCTOR_ID)
+    values (7,'Louise','Adam', 'Minsk, Uralavo', TO_DATE('11-11-1980', 'MM-DD-YYYY'), 1, 2);
+Insert into PATIENT (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE, PAYMENT_TYPE_ID, DOCTOR_ID)
+    values (8,'Lamonica','Chesnutt', 'Minsk, 140', TO_DATE('11-09-1970', 'MM-DD-YYYY'), 2, 10);
+Insert into PATIENT (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE, PAYMENT_TYPE_ID, DOCTOR_ID)
+    values (9,'Sheree','Delaune', 'Minsk, 4653', TO_DATE('09-01-1978', 'MM-DD-YYYY'), 2, 10);
+Insert into PATIENT (ID, FIRST_NAME, LAST_NAME, ADDRESS, BIRTH_DATE, PAYMENT_TYPE_ID, DOCTOR_ID)
+    values (10,'Tad','Kramp', 'Minsk, Uralavo', TO_DATE('11-11-1980', 'MM-DD-YYYY'), 1, 10);
 
 REM INSERTING into SERVICE
 SET DEFINE OFF;
 Insert into SERVICE (ID, TITLE, COST) values (1, 'TOOTH EXTRACTION', 40);
 Insert into SERVICE (ID, TITLE, COST) values (2, 'TOOTH CLEAN', 5);
 Insert into SERVICE (ID, TITLE, COST) values (3, 'TOOTH CROWN', 80);
+Insert into SERVICE (ID, TITLE, COST) values (4, 'TOOTH ROOT EXTRACTION', 100);
+Insert into SERVICE (ID, TITLE, COST) values (5, 'TOOTH DECAY', 80);
+Insert into SERVICE (ID, TITLE, COST) values (6, 'CHILD TOOTH EXTRACTION', 30);
+Insert into SERVICE (ID, TITLE, COST) values (7, 'TOOTH SEAL', 60);
+Insert into SERVICE (ID, TITLE, COST) values (8, 'CHILD TOOTH CROWN', 80);
+Insert into SERVICE (ID, TITLE, COST) values (9, 'CHILD WHITENING', 50);
+Insert into SERVICE (ID, TITLE, COST) values (10, 'WHITENING', 65);
 
 REM INSERTING into TOOTH_FORMULA
 SET DEFINE OFF;
 Insert into TOOTH_FORMULA (ID, IS_MISSED, IS_ARTIFICIAL, IS_CROWN, IS_MILK, TYPE, PATIENT_ID)
     values (1, 1, 0, 0, 0, 'incisors', 1);
 Insert into TOOTH_FORMULA (ID, IS_MISSED, IS_ARTIFICIAL, IS_CROWN, IS_MILK, TYPE, PATIENT_ID)
-    values (2, 0, 0, 0, 0, 'incisors', 2);
+    values (2, 0, 1, 0, 1, 'incisors', 7);
 Insert into TOOTH_FORMULA (ID, IS_MISSED, IS_ARTIFICIAL, IS_CROWN, IS_MILK, TYPE, PATIENT_ID)
-    values (3, 0, 0, 0, 0, 'incisors', 3);
+    values (3, 1, 0, 0, 0, 'canines', 3);
+Insert into TOOTH_FORMULA (ID, IS_MISSED, IS_ARTIFICIAL, IS_CROWN, IS_MILK, TYPE, PATIENT_ID)
+    values (4, 1, 0, 0, 2, 'premolars', 1);
+Insert into TOOTH_FORMULA (ID, IS_MISSED, IS_ARTIFICIAL, IS_CROWN, IS_MILK, TYPE, PATIENT_ID)
+    values (5, 0, 1, 0, 10, 'incisors', 4);
+Insert into TOOTH_FORMULA (ID, IS_MISSED, IS_ARTIFICIAL, IS_CROWN, IS_MILK, TYPE, PATIENT_ID)
+    values (6, 0, 1, 0, 9, 'incisors', 3);
+Insert into TOOTH_FORMULA (ID, IS_MISSED, IS_ARTIFICIAL, IS_CROWN, IS_MILK, TYPE, PATIENT_ID)
+    values (7, 1, 0, 0, 5, 'premolars', 1);
+Insert into TOOTH_FORMULA (ID, IS_MISSED, IS_ARTIFICIAL, IS_CROWN, IS_MILK, TYPE, PATIENT_ID)
+    values (8, 0, 1, 0, 5, 'canines', 2);
+Insert into TOOTH_FORMULA (ID, IS_MISSED, IS_ARTIFICIAL, IS_CROWN, IS_MILK, TYPE, PATIENT_ID)
+    values (9, 0, 0, 0, 4, 'incisors', 3);
+Insert into TOOTH_FORMULA (ID, IS_MISSED, IS_ARTIFICIAL, IS_CROWN, IS_MILK, TYPE, PATIENT_ID)
+    values (10, 1, 0, 0, 6, 'incisors', 10);
+Insert into TOOTH_FORMULA (ID, IS_MISSED, IS_ARTIFICIAL, IS_CROWN, IS_MILK, TYPE, PATIENT_ID)
+    values (11, 0, 1, 0, 8, 'incisors', 5);
+Insert into TOOTH_FORMULA (ID, IS_MISSED, IS_ARTIFICIAL, IS_CROWN, IS_MILK, TYPE, PATIENT_ID)
+    values (12, 0, 0, 0, 10, 'canines', 6);
 
 REM INSERTING into VISIT
 SET DEFINE OFF;
 Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (1, TO_DATE('11-12-2017', 'MM-DD-YYYY'), 2, 1);
-Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (2, TO_DATE('08-11-2017', 'MM-DD-YYYY'), 3, 3);
+Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (2, TO_DATE('08-11-2017', 'MM-DD-YYYY'), 5, 3);
 Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (3, TO_DATE('09-01-2017', 'MM-DD-YYYY'), 1, 1);
+Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (4, TO_DATE('01-12-2017', 'MM-DD-YYYY'), 4, 1);
+Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (5, TO_DATE('02-11-2017', 'MM-DD-YYYY'), 5, 5);
+Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (6, TO_DATE('03-01-2017', 'MM-DD-YYYY'), 4, 6);
+Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (7, TO_DATE('11-12-2017', 'MM-DD-YYYY'), 8, 9);
+Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (8, TO_DATE('08-11-2017', 'MM-DD-YYYY'), 9, 10);
+Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (9, TO_DATE('04-01-2017', 'MM-DD-YYYY'), 7, 7);
+Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (10, TO_DATE('05-12-2017', 'MM-DD-YYYY'), 1, 8);
+Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (11, TO_DATE('08-11-2017', 'MM-DD-YYYY'), 2, 5);
+Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (12, TO_DATE('06-01-2017', 'MM-DD-YYYY'), 3, 4);
+Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (13, TO_DATE('10-11-2017', 'MM-DD-YYYY'), 4, 2);
+Insert into VISIT (ID, VISIT_DATE, DOCTOR_ID, PATIENT_ID) values (14, TO_DATE('11-12-2017', 'MM-DD-YYYY'), 4, 2);
 
 REM INSERTING into VISIT_SERVICE
 SET DEFINE OFF;
 Insert into VISIT_SERVICE (SERVICE_ID, TOOTH_FORMULA_ID, VISIT_ID) values (1, 1, 1);
-Insert into VISIT_SERVICE (SERVICE_ID, TOOTH_FORMULA_ID, VISIT_ID) values (2, 1, 2);
-Insert into VISIT_SERVICE (SERVICE_ID, TOOTH_FORMULA_ID, VISIT_ID) values (1, 1, 3);
+Insert into VISIT_SERVICE (SERVICE_ID, TOOTH_FORMULA_ID, VISIT_ID) values (2, 3, 2);
+Insert into VISIT_SERVICE (SERVICE_ID, TOOTH_FORMULA_ID, VISIT_ID) values (3, 4, 3);
+Insert into VISIT_SERVICE (SERVICE_ID, TOOTH_FORMULA_ID, VISIT_ID) values (5, 7, 1);
+Insert into VISIT_SERVICE (SERVICE_ID, TOOTH_FORMULA_ID, VISIT_ID) values (10, 11, 5);
+Insert into VISIT_SERVICE (SERVICE_ID, TOOTH_FORMULA_ID, VISIT_ID) values (6, 12, 6);
+Insert into VISIT_SERVICE (SERVICE_ID, TOOTH_FORMULA_ID, VISIT_ID) values (1, 10, 8);
+Insert into VISIT_SERVICE (SERVICE_ID, TOOTH_FORMULA_ID, VISIT_ID) values (8, 2, 9);
+Insert into VISIT_SERVICE (SERVICE_ID, TOOTH_FORMULA_ID, VISIT_ID) values (3, 5, 12);
 
 --------------------------------------------------------
 --  Constraints
@@ -278,6 +341,18 @@ BEGIN
 END;
 /
 ALTER TRIGGER "DOCTOR_INSERT" ENABLE;
+
+CREATE OR REPLACE TRIGGER "SERVICE_INSERT"
+BEFORE UPDATE OR INSERT ON SERVICE
+FOR EACH ROW
+BEGIN
+  SELECT SERVICE_SEQ.NEXTVAL
+  INTO :new.ID
+  FROM dual;
+END;
+/
+ALTER TRIGGER "SERVICE_INSERT" ENABLE;
+
 
 CREATE OR REPLACE TRIGGER "VISIT_SERVICE_INSERT"
 BEFORE INSERT ON VISIT_SERVICE
