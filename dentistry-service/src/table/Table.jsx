@@ -86,7 +86,7 @@ class EditableTable extends Component {
 	prepareTableData = (res) => {
 		const emptyRow = {};
 		res.columns.forEach((column) => {
-			emptyRow[column] = null;
+			emptyRow[column.key] = undefined;
 		});
 		res.rows.push(emptyRow);
 		this.setState({

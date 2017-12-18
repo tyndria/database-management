@@ -9,7 +9,7 @@ class App extends Component {
 		super();
 
 		this.state = {
-			route: 'Patients'
+			route: 'Doctors'
 		}
 	}
 

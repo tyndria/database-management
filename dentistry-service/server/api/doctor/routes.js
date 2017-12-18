@@ -15,7 +15,7 @@ router.route('/')
 	})
 	.put((req, res) => {
 		const {rowsToUpdate} = req.body;
-		return utils.deleteTableRecords(res, TABLE_NAME, rowsToUpdate);
+		return utils.updateTableRecords(res, TABLE_NAME, rowsToUpdate);
 	});
 
 
